@@ -1,0 +1,27 @@
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+  animation: 0.5s linear 0s forwards fadein;
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+    margin: 20px 0;
+    word-break: break-word;
+    flex: 1 1 auto;
+}
+
+.list button {
+  text-align: left;
+}
+
+.list li:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+img {
+  height: auto;
+  width: 100%;
+}

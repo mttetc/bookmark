@@ -1,0 +1,8 @@
+input[type=text] {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    border: 0 none;
+    background-color: #dcdcde;
+    flex: 1 1 auto;
+}

@@ -1,0 +1,1 @@
+export const BASE_URL = 'http://noembed.com/embed?url='

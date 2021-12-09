@@ -1,0 +1,23 @@
+.button {
+    height: 40px;
+    background-color: blue;
+    color: white;
+    border: 0 none;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.button-error {
+    background-color: red;
+    margin-left: auto;
+}
+
+.link {
+    color: blue;
+    text-decoration: underline;
+    background-color: transparent;
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
