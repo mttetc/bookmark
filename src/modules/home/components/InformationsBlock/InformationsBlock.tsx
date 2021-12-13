@@ -39,7 +39,7 @@ export const InformationsBlock: FC<InformationsBlockProps> = ({ addedUrl, index,
         return <>Chargement...</>
     }
 
-    const { html, url, title, author_name, author_url, upload_date, duration, type, width, height } = response
+    const { html, url, title, author_name, author_url, upload_date, duration, width, height } = response
 
     const onOpenExternal = (url: string) => {
         window.open(url)
@@ -47,7 +47,7 @@ export const InformationsBlock: FC<InformationsBlockProps> = ({ addedUrl, index,
 
     return (
         <div className='card'>
-            {html && <div className='iframe-container' dangerouslySetInnerHTML={{ __html: html }} /> }
+            {html && <div className='iframe-container' dangerouslySetInnerHTML={{ __html: html }} />}
 
             <ul className="list">
                 {url && <li><strong>Url</strong>: <Button type="link" onClick={() => onOpenExternal(url)} title={url} /></li>}

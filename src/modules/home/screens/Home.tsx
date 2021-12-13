@@ -1,52 +1,23 @@
-import { FC, FormEvent, KeyboardEvent, useState } from "react";
+import { FC, useState } from "react";
 import { ErrorType } from "../../../types/form";
-import { isBlank, isUrl } from "../../../utils/regex";
 import { AddForm, AddFormProps } from "../components/AddForm/AddForm";
 import { InformationsBlock } from "../components/InformationsBlock/InformationsBlock";
+import { HomeServices } from "./Home.services";
 import './Home.styles.css';
+
+const { onSubmit, onChange, onDelete, onKeyDown } = HomeServices
 
 export const Home: FC = () => {
     const [addedUrls, setAddedUrls] = useState<string[]>([])
     const [error, setError] = useState<ErrorType | null>(null)
     const [inputSearch, setInputSearch] = useState('')
 
-    const onSubmit = () => {
-        if (!inputSearch || isBlank(inputSearch)) {
-            setError('empty')
-        } else if (!isUrl(inputSearch)) {
-            setError('url')
-        } else {
-            setError(null)
-            setAddedUrls((prev) => [...prev, inputSearch])
-        }
-    }
-
-    const onChange = (e: FormEvent<HTMLInputElement>) => {
-        setInputSearch(e.currentTarget.value)
-    }
-
-    const onDelete = (i: number) => {
-        const nextAddedUrls = addedUrls.filter((addedUrl, index) => index !== i)
-
-        setError(null)
-        setInputSearch('')
-        setAddedUrls(nextAddedUrls)
-    }
-
-    const onKeyDown = (e: KeyboardEvent<HTMLDivElement>): void => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            e.stopPropagation();
-            onSubmit();
-        }
-    }
-
     const formProps: AddFormProps = {
         error,
         inputSearch,
-        onChange,
-        onSubmit,
-        onKeyDown,
+        onChange: (e) => onChange({ e, setInputSearch }),
+        onSubmit: () => onSubmit({ inputSearch, setError, setAddedUrls }),
+        onKeyDown: (e) => onKeyDown({ e, inputSearch, setError, setAddedUrls }),
     }
 
     return (
@@ -54,7 +25,7 @@ export const Home: FC = () => {
             <h1>Bookmark application</h1>
             <div className="flex-wrapper">
                 <div className="cards-wrapper">
-                    {addedUrls && addedUrls.map((addedUrl, index) => <InformationsBlock index={index} addedUrl={addedUrl} onDelete={onDelete} setApiError={setError} />)}
+                    {addedUrls && addedUrls.map((addedUrl, index) => <InformationsBlock key={addedUrl} index={index} addedUrl={addedUrl} onDelete={() => onDelete({ i: index, addedUrls, setError, setInputSearch, setAddedUrls })} setApiError={setError} />)}
                 </div>
                 <AddForm {...formProps} />
             </div>

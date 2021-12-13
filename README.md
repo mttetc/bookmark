@@ -1,4 +1,4 @@
-Se placer à la racine
+Little application without any external packages except for react and typescript
 
 Pour installer l'application :
 
