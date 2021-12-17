@@ -4,6 +4,7 @@ import { useFetch } from "../../../../hooks/useFetch";
 import { ApiResponse } from "../../../../types/ApiResponse";
 import { ErrorType } from "../../../../types/form";
 import { _date } from "../../../../utils/date";
+import { onOpenExternal } from "../../../../utils/external";
 import './InformationsBlock.styles.css';
 
 const { timeAgo, formatDate, formatHour } = _date
@@ -40,10 +41,6 @@ export const InformationsBlock: FC<InformationsBlockProps> = ({ addedUrl, index,
     }
 
     const { html, url, title, author_name, author_url, upload_date, duration, width, height } = response
-
-    const onOpenExternal = (url: string) => {
-        window.open(url)
-    }
 
     return (
         <div className='card'>
