@@ -27,7 +27,6 @@ const formatDate = (date: Date) => {
     return nextDate.toLocaleDateString("fr-FR", options)
 }
 
-
 const getDuration = (timeAgoInSeconds: number): { interval: number, epoch: Epoch } | undefined => {
     for (let [name, seconds] of epochs) {
         const interval = Math.floor(timeAgoInSeconds / seconds);

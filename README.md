@@ -1,9 +1,10 @@
 Little application without any external packages except for react and typescript
+Only add, fetch and remove elements
 
-Pour installer l'application :
+Install :
 
 ### `yarn install`
 
-Pour lancer l'application :
+Boot :
 
 ### `yarn start`
