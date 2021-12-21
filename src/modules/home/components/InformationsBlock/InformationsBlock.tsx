@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import { Button } from "../../../../components/Button/Button";
-import { useFetch } from "../../../../hooks/useFetch";
 import { ApiResponse } from "../../../../types/ApiResponse";
 import { ErrorType } from "../../../../types/form";
 import { _date } from "../../../../utils/date";
@@ -10,14 +9,13 @@ import './InformationsBlock.styles.css';
 const { timeAgo, formatDate, formatHour } = _date
 
 export type InformationsBlockProps = {
-    addedUrl: string
-    index: number
-    onDelete: (index: number) => void
+    id: number
+    isLoading: boolean
+    onDelete: ({ e, id }: { e: React.FormEvent, id: number }) => void
     setApiError: (type: ErrorType | null) => void
-}
+} & ApiResponse
 
-export const InformationsBlock: FC<InformationsBlockProps> = ({ addedUrl, index, onDelete, setApiError }) => {
-    const { response, isLoading } = useFetch<ApiResponse>({ url: addedUrl });
+export const InformationsBlock: FC<InformationsBlockProps> = ({ isLoading, onDelete, setApiError, id, error, html, url, title, author_name, author_url, upload_date, duration, width, height }) => {
     const [timeSince, setTimeSince] = useState<string>('')
 
     useEffect(() => {
@@ -28,11 +26,11 @@ export const InformationsBlock: FC<InformationsBlockProps> = ({ addedUrl, index,
     }, [])
 
     useEffect(() => {
-        response && setApiError(response.error ? 'api' : null)
-    }, [response, setApiError])
+        setApiError(error ? 'api' : null)
+    }, [setApiError, error])
 
 
-    if (!response || !addedUrl || response.error) {
+    if (error) {
         return null
     }
 
@@ -40,18 +38,16 @@ export const InformationsBlock: FC<InformationsBlockProps> = ({ addedUrl, index,
         return <>Chargement...</>
     }
 
-    const { html, url, title, author_name, author_url, upload_date, duration, width, height } = response
-
     return (
         <div className='card'>
             {html && <div className='iframe-container' dangerouslySetInnerHTML={{ __html: html }} />}
 
             <ul className="list">
-                {url && <li><strong>Url</strong>: <Button type="link" onClick={() => onOpenExternal(url)} title={url} /></li>}
+                {url && <li><strong>Url</strong>: <Button buttonType="link" onClick={() => onOpenExternal(url)} title={url} /></li>}
 
                 {title && <li><strong>Titre</strong>: {title}</li>}
 
-                {author_name && author_url && <li><strong>Auteur</strong>: <Button type="link" onClick={() => onOpenExternal(author_url)} title={author_name} /></li>}
+                {author_name && author_url && <li><strong>Auteur</strong>: <Button buttonType="link" onClick={() => onOpenExternal(author_url)} title={author_name} /></li>}
 
                 {timeSince && <li><strong>Date d'ajout</strong>: {timeSince}</li>}
 
@@ -62,7 +58,7 @@ export const InformationsBlock: FC<InformationsBlockProps> = ({ addedUrl, index,
                 {width && height && <li><strong>Largeur x Hauteur</strong> : {width} x {height}</li>}
             </ul>
 
-            <Button type="button" title="Delete" variant="error" onClick={() => onDelete(index)} />
+            <Button title="Delete" variant="error" onClick={(e) => onDelete({ e, id })} />
         </div>
     )
 }

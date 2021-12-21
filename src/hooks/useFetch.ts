@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BASE_URL } from '../const';
 import { isBlank } from '../utils/regex';
 
-export const useFetch = <D>({ url }: { url: string }) => {
+export const useFetch = <D>({ url }: { url?: string | null}): { response: D | null, isLoading: boolean } => {
   const [isLoading, setIsLoading] = useState(false)
   const [response, setResponse] = useState<D | null>(null);
 

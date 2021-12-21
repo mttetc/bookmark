@@ -3,6 +3,7 @@
     align-items: center;
     position: sticky;
     bottom: 0;
+    width: 100%;
 }
 
 .input-wrapper {

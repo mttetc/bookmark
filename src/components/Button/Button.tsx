@@ -3,13 +3,9 @@ import './Button.styles.css'
 
 export type ButtonProps = {
     title: string
-    type: 'button' | 'link'
+    buttonType?: 'button' | 'link'
     variant?: 'error'
-    onClick: () => void
+    onClick?: (e: React.FormEvent) => void
 }
 
-export const Button: FC<ButtonProps> = ({ title, type, variant, onClick }) => {
-    return (
-        <button className={`${type}${variant ? ` button-${variant}`: ''}`} type="submit" onClick={onClick}>{title}</button>
-    )
-}
+export const Button: FC<ButtonProps> = ({ title, buttonType = 'button', variant, onClick }) => <button className={`${buttonType}${variant ? ` button-${variant}`: ''}`} type="submit" onClick={onClick}>{title}</button>

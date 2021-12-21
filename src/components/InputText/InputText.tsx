@@ -1,15 +1,10 @@
-import { FC, FormEvent, KeyboardEvent } from "react"
+import { FC, FormEvent } from "react"
 import './InputText.styles.css'
 
 export type InputTextProps = {
     placeholder: string
     value: string
-    onKeyDown: (e: KeyboardEvent<HTMLDivElement>) => void
     onChange: (e: FormEvent<HTMLInputElement>) => void
 }
 
-export const InputText: FC<InputTextProps> = ({ placeholder, value, onKeyDown, onChange }) => {
-    return (
-        <input type="text" placeholder={placeholder} value={value} onChange={onChange} onKeyDown={onKeyDown} />
-    )
-}
+export const InputText: FC<InputTextProps> = ({ placeholder, value, onChange }) => <input type="text" placeholder={placeholder} value={value} onChange={onChange} />
