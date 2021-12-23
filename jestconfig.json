@@ -1,0 +1,15 @@
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "\\.(css|less)$": "<rootDir>/styleMock.ts"
+  },
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+  "transformIgnorePatterns": [
+    "/node_modules/(?![@autofiy/autofiyable|@autofiy/property]).+\\.js$",
+    "/node_modules/(?![@autofiy/autofiyable|@autofiy/property]).+\\.ts$",
+    "/node_modules/(?![@autofiy/autofiyable|@autofiy/property]).+\\.tsx$"
+  ]
+}

@@ -39,7 +39,7 @@ export const Home: FC = () => {
                             key={props.id}
                             id={props.id}
                             isLoading={isLoading}
-                            onDelete={({ e, id }) => onDelete({ e, id, addedItems, setError, setInputSearch, setAddedItems })}
+                            onDelete={({ e, id }) => onDelete({ e, id, addedItems, setError, setAddedItems })}
                             setApiError={setError}
                         />
                     )}

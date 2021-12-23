@@ -24,13 +24,12 @@ const onChange = ({ e, setInputSearch }: { e: FormEvent<HTMLInputElement>, setIn
     setInputSearch(e.currentTarget.value)
 }
 
-const onDelete = ({ e, id, addedItems, setError, setInputSearch, setAddedItems }: { e: FormEvent, id: number, addedItems: InformationsBlockDataProps[], setError: (error: ErrorType | null) => void, setInputSearch: (inputSearch: string) => void, setAddedItems: Dispatch<SetStateAction<InformationsBlockDataProps[]>> }) => {
+const onDelete = ({ e, id, addedItems, setError, setAddedItems }: { e: FormEvent<Element>, id: number, addedItems: InformationsBlockDataProps[], setError: (error: ErrorType | null) => void, setAddedItems: Dispatch<SetStateAction<InformationsBlockDataProps[]>> }) => {
     e.preventDefault()
 
     const nextAddedUrls = addedItems.filter(({ id: addedUrlId }) => addedUrlId !== id)
 
     setError(null)
-    setInputSearch('')
     setAddedItems(nextAddedUrls)
 }
 
