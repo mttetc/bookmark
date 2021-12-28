@@ -1,25 +1,26 @@
-import { useCallback, useEffect, useState } from 'react';
-import { BASE_URL } from '../const';
-import { isBlank } from '../utils/regex';
+import { useEffect, useState } from "react";
+import { doFetch } from "../utils/fetch";
+import { isBlank } from "../utils/regex";
 
-export const useFetch = <D>({ url }: { url?: string | null }): { response: D | null, isLoading: boolean, next: () => void } => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [response, setResponse] = useState<D | null>(null);
-
-  const doFetch = useCallback(async () => {
-    setIsLoading(true)
-    const res = await fetch(`${BASE_URL}${url}`);
-
-    if (res.ok) {
-      const json = await res.json() as D;
-      setResponse(json);
-      setIsLoading(false)
-    }
-  }, [url])
+export const useFetch = <D>({
+  url,
+}: {
+  url?: string | null;
+}): { response?: D; isLoading: boolean } => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [response, setResponse] = useState<D | undefined>();
 
   useEffect(() => {
-    url && url.length > 0 && !isBlank(url) && doFetch();
-  }, [url, doFetch]);
+    if (url && url.length > 0 && !isBlank(url)) {
+      setIsLoading(true);
 
-  return { response, isLoading, next: doFetch };
+      const callFetch = async () => await doFetch<D>({ url });
+
+      callFetch()
+        .then((data) => setResponse(data))
+        .then(() => setIsLoading(false));
+    }
+  }, [url]);
+
+  return { response, isLoading };
 };
