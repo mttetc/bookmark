@@ -1,19 +1,19 @@
 import { FC, FormEvent, useEffect, useState } from "react";
 import { Button } from "../../../../components/Button/Button";
+import { Bookmark } from "../../../../store/types";
 import { ApiResponse } from "../../../../types/ApiResponse";
 import { ErrorType } from "../../../../types/form";
 import { _date } from "../../../../utils/date";
 import { onOpenExternal } from "../../../../utils/external";
-import { InformationsBlockDataProps } from "../../screens/Home.services";
 import "./InformationsBlock.styles.css";
 
 const { timeAgo, formatDate, formatHour } = _date;
 
 export type InformationsBlockProps = {
-  id: number;
   isLoading: boolean;
-  addedItems: InformationsBlockDataProps[];
-  setAddedItems: (nextAddedUrls: InformationsBlockDataProps[]) => void;
+  addedItems: Bookmark[];
+  id: number;
+  setAddedItems: (nextAddedUrls: Bookmark[]) => void;
   setError: (type: ErrorType | null) => void;
 } & ApiResponse;
 

@@ -1,4 +1,4 @@
-import { FC, FormEvent } from "react";
+import { FC, FormEvent, useState } from "react";
 import { Button } from "../../../../components/Button/Button";
 import { InputText } from "../../../../components/InputText/InputText";
 import { ErrorType } from "../../../../types/form";
@@ -7,19 +7,17 @@ import "./AddForm.styles.css";
 
 export type AddFormProps = {
   error: ErrorType | null;
-  inputSearch: string;
   setError: (error: ErrorType | null) => void;
   setAddedItem: (inputSearch: string) => void;
-  setInputSearch: (inputSearch: string) => void;
 };
 
 export const AddForm: FC<AddFormProps> = ({
   error,
-  inputSearch,
   setError,
   setAddedItem,
-  setInputSearch,
 }) => {
+  const [inputSearch, setInputSearch] = useState("");
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

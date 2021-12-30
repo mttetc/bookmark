@@ -1,4 +1,4 @@
-export type VimeoResponse = {
+export type VimeoResponse = Partial<{
   message: string;
   account_type: string;
   author_name: string;
@@ -22,9 +22,9 @@ export type VimeoResponse = {
   version: string;
   video_id: number;
   width: number;
-};
+}>;
 
-export type FlickrResponse = {
+export type FlickrResponse = Partial<{
   author_name: string;
   author_url: string;
   cache_age: number;
@@ -47,11 +47,10 @@ export type FlickrResponse = {
   web_page: string;
   web_page_short_url: string;
   width: number;
-};
+}>;
 
 export type ApiResponse =
   | {
       error?: string;
-    }
-  | FlickrResponse
-  | VimeoResponse;
+    } & FlickrResponse &
+      VimeoResponse;
