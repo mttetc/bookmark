@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from "react";
-import uniqid from "uniqid";
 import { useFetch } from "../../../hooks/useFetch";
 import { useStore } from "../../../store";
 import { selectAddBookmark, selectBookmarks } from "../../../store/selectors";
